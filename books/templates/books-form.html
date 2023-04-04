@@ -1,0 +1,61 @@
+{% load widget_tweaks %}
+<div class="card mb-4">
+    <div class="card-header">
+        <i class="fa-solid fa-user"></i>
+        Book Details
+    </div>
+    <div class="card-body">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if page == 'books-add' %}
+        <form method="post" action="{% url 'books-add' %}" enctype="multipart/form-data">
+        {% else %}
+        <form method="post" action="{{ request.path }}" enctype="multipart/form-data">
+        {% endif %}
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+                {% render_field form.title class+="form-control" placeholder="Title" %}
+                <label for="id_username">Title</label>
+                {{ form.title.errors }}
+            </div>
+            <div class="form-floating mb-3">
+                {% render_field form.slug class+="form-control" placeholder="slug" %}
+                <label for="id_first_name">Slug</label>
+                {{ form.slug.errors }}
+            </div>
+            <div class="form-floating mb-3">
+                {% render_field form.description class+="form-control" placeholder="Enter your description" %}
+                <label for="id_last_name">Description</label>
+                {{ form.description.errors }}
+            </div>
+            <div class="form-floating mb-3">
+                {% render_field form.author class+="form-control" placeholder="Author" %}
+                <label for="id_email">Author</label>
+                {{ form.email.errors }}
+            </div>
+            <div class="form-floating mb-3">
+                {% render_field form.cover class+="form-control" type="file" %}
+                <label for="id_date_of_birth">Cover</label>
+                {{ form.cover.errors }}
+            </div>
+            <div hidden>
+                {% render_field form.created_by %}
+            </div>
+            <div class="mt-4 mb-0">
+                <div>
+                    {% if page == 'books-add' %}
+                    <input type="submit" class="btn btn-primary btn-block" value="Add Book">
+                    {% else %}
+                    <input type="submit" class="btn btn-primary btn-block" value="Change Data">
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+{% extends 'base-dashboard.html' %}
+
+{% block content %}
+
+<div class="container-fluid px-4">
+    {% include "nav-title.html" with title="Books" %}
+    
+    {% include "books-form.html" with page="books-add" %}
+    
+</div>
+{% endblock %}

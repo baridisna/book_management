@@ -1,0 +1,11 @@
+<h1 class="mt-4">{{ title }}</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{% url 'books' %}">Home</a></li>
+
+    {% if not navigation.third %}
+    <li class="breadcrumb-item active">{{ navigation.second }}</li>
+    {% else %}
+    <li class="breadcrumb-item"><a href="{{ navigation.second_url }}">{{ navigation.second }}</a></li>
+    <li class="breadcrumb-item active">{{ navigation.third }}</li>
+    {% endif %}
+</ol>

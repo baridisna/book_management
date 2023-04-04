@@ -1,0 +1,51 @@
+{% extends 'base-dashboard.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="container-fluid px-4">
+    {% include "nav-title.html" with title="Books" %}
+
+    <div class="container">
+
+        <div class="mb-3">
+            <a class="btn btn-primary" href="{% url 'books-add' %}"><i class="fa-solid fa-plus"></i> New Book</a>
+        </div>
+        {% for book in books %}
+        <!-- book content -->
+        <div class="card p-3 mb-2">
+            <div class="row">
+                <div class="col-lg-2">
+                    <figure>
+                        <img src="{{ book.cover.url }}" class="img-cover">
+                    </figure>
+                </div>
+                <div class="col-lg-8">
+                    <h3><b>{{ book.title }}</b></h3>
+                    <h5>{{ book.author }}</h5>
+                    <p><i>description: {{ book.description }}</i></p>
+                </div>
+                <div class="col-lg-2">
+                    <p>created by: {{ book.created_by.username }}</p>
+                    <div class="align-right-bottom">
+                        <a href="{% url 'books-edit' id=book.id %}" class="btn btn-primary">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <button data-row="{{ book.id }}" type="button" class="btn btn-danger btnDelete">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end book content -->
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
+
+{% block customScript %}
+{% load static %}
+<script src="{% static 'js/books.js' %}"></script>
+{% endblock %}

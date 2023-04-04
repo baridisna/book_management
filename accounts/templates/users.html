@@ -1,0 +1,50 @@
+{% extends 'base-dashboard.html' %}
+
+{% block content %}
+<div class="container-fluid px-4">
+    {% include "nav-title.html" with title="User Management" %}
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Users List
+        </div>
+        <div class="card-body">
+            <div class="mb-2">
+                <a class="btn btn-primary" href="{% url 'users-add' %}"><i class="fa-solid fa-plus"></i> New User</a>
+            </div>
+            <table id="usersTable">
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Date of Birth</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Date of Birth</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block customScript %}
+{% load static %}
+<script src="{% static 'js/users.js' %}"></script>
+{% endblock %}

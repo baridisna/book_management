@@ -1,0 +1,31 @@
+<div id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+        <div class="sb-sidenav-menu">
+            <div class="nav">
+                <div class="sb-sidenav-menu-heading">Book</div>
+                <a class="nav-link" href="{% url 'books' %}">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-book"></i></div>
+                    Book Management
+                </a>
+                
+                {% if user.role.slug == 'administrator' %}
+                <div class="sb-sidenav-menu-heading">Users</div>
+                <a class="nav-link" href="{% url 'users' %}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                    Users Management
+                </a>
+                {% endif %}
+                
+                <div class="sb-sidenav-menu-heading">Account</div>
+                <a class="nav-link" href="{% url 'profile' %}">
+                    <div class="sb-nav-link-icon"><i class="fa-solid fa-gear"></i></div>
+                    Profile Settings
+                </a>
+            </div>
+        </div>
+        <div class="sb-sidenav-footer">
+            <div class="small">Logged in as:</div>
+            {{ user.username }}
+        </div>
+    </nav>
+</div>
