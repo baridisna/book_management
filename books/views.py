@@ -18,12 +18,13 @@ def BookView(request):
     navigation = {
         'second': 'Books'
     }
-    return render(request=request, template_name="books.html", 
-                  context={"navigation": navigation, "books": books, "user": user})
+    return render(
+        request=request, template_name="books.html",
+        context={"navigation": navigation, "books": books, "user": user})
 
 
 @login_required(login_url='/login/')
-def BookAddView(request):    
+def BookAddView(request):
     if request.method == 'POST':
         data = copy.copy(request.POST)
         data['created_by'] = request.user
@@ -43,8 +44,9 @@ def BookAddView(request):
         'third': 'Add'
     }
     user = request.user
-    return render(request=request, template_name="books-add.html", 
-                  context={"navigation": navigation, "form": form, "user": user})
+    return render(
+        request=request, template_name="books-add.html",
+        context={"navigation": navigation, "form": form, "user": user})
 
 
 @login_required(login_url='/login/')
@@ -56,7 +58,7 @@ def BookEditView(request, id):
     if request.user.role.slug == 'member' and book.created_by != user:
         return redirect('error/401')
 
-    form = BookForm(request.POST or None, request.FILES or None, instance = book)
+    form = BookForm(request.POST or None, request.FILES or None, instance=book)
     if form.is_valid():
         form.save()
         messages.success(request, "Book data changed")
@@ -69,7 +71,8 @@ def BookEditView(request, id):
         'second_url': '/books/',
         'third': 'Edit'
     }
-    return render(request=request, template_name="books-edit.html",
+    return render(
+        request=request, template_name="books-edit.html",
         context={"form": form, "navigation": navigation, "user": user})
 
 
@@ -83,4 +86,4 @@ def BooksDestroyView(request, id):
         return redirect('error/401')
 
     book.delete()
-    return redirect('/books/') 
+    return redirect('/books/')

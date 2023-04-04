@@ -14,16 +14,19 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'date_of_birth',
-        'phone_number', 'password1', 'password2', 'role')
+        fields = (
+            'username', 'first_name', 'last_name', 'email', 'date_of_birth',
+            'phone_number', 'password1', 'password2', 'role'
+        )
 
 
 class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'date_of_birth',
-        'phone_number')
+        fields = (
+            'username', 'first_name', 'last_name', 'email', 'date_of_birth',
+            'phone_number')
 
 
 class UsersForm(forms.ModelForm):
@@ -38,5 +41,6 @@ class UsersForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'date_of_birth',
-        'phone_number', 'role')
+        fields = (
+            'username', 'first_name', 'last_name', 'email', 'date_of_birth',
+            'phone_number', 'role')
