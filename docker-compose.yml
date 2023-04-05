@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  db:
+    image: mysql:8.0.32
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: 'book_management'
+      MYSQL_ROOT_PASSWORD: 'P4ssw0rd'
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro
+      - /home/mysql/data:/var/lib/mysql
+
+  app:
+    build: .
+    command: sh -c "python manage.py migrate &&
+                    python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_NAME: 'book_management'
+      DATABASE_USER: 'root'
+      DATABASE_PASSWORD: 'P4ssw0rd'
+      DATABASE_HOST: 'db'
+    ports:
+      - "8000:8000"

@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-=1(hw$7(w4z139=nou#cm270t4#r!zunl5pg5pha1c8^xtt5a%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'book_management.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'book_management',
-        'USER': 'root',
-        'PASSWORD': 'P@ssw0rd',
-        'HOST': 'localhost',
+        'NAME': os.environ['DATABASE_NAME'],
+        'USER': os.environ['DATABASE_USER'],
+        'PASSWORD': os.environ['DATABASE_PASSWORD'],
+        'HOST': os.environ['DATABASE_HOST'],
         'PORT': '3306',
     }
 }
