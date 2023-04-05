@@ -4,6 +4,7 @@
 1. This repo can be build in docker by run
 
 ```docker compose up```
+
 2. open URL in
 ``` localhost:8000/register ```
 
