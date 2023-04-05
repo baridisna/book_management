@@ -8,7 +8,7 @@
                     Book Management
                 </a>
                 
-                {% if user.role.slug == 'administrator' %}
+                {% if user.role.slug == 'administrator' or user.is_superuser %}
                 <div class="sb-sidenav-menu-heading">Users</div>
                 <a class="nav-link" href="{% url 'users' %}">
                     <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>

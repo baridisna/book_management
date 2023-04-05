@@ -10,7 +10,7 @@ from .models import Book
 @login_required(login_url='/login/')
 def BookView(request):
     user = request.user
-    if user.role.slug == 'administrator':
+    if user.role.slug == 'administrator' or request.user.is_superuser:
         books = Book.objects.all()[:10]
     else:
         books = Book.objects.filter(created_by=user)
@@ -55,8 +55,9 @@ def BookEditView(request, id):
     user = request.user
 
     # Validate member can only edit their book
-    if request.user.role.slug == 'member' and book.created_by != user:
-        return redirect('error/401')
+    if not request.user.is_superuser and request.user.role.slug == 'member' \
+        and book.created_by != user:
+        return redirect('/error/401')
 
     form = BookForm(request.POST or None, request.FILES or None, instance=book)
     if form.is_valid():
@@ -82,8 +83,9 @@ def BooksDestroyView(request, id):
     user = request.user
 
     # Validate member can only edit their book
-    if request.user.role.slug == 'member' and book.created_by != user:
-        return redirect('error/401')
+    if not request.user.is_superuser and request.user.role.slug == 'member' \
+        and book.created_by != user:
+        return redirect('/error/401')
 
     book.delete()
     return redirect('/books/')

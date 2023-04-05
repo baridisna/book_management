@@ -9,3 +9,8 @@
     
 </div>
 {% endblock %}
+
+{% block customScript %}
+{% load static %}
+<script src="{% static 'js/books.js' %}"></script>
+{% endblock %}

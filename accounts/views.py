@@ -53,8 +53,10 @@ def RolesView(request):
 
 @login_required(login_url='/login/')
 def UsersView(request):
-    if request.user.role.slug != "administrator":
-        return redirect('error/401')
+    if request.user.is_superuser:
+        print('akaka')
+    if request.user.role.slug != "administrator" and not request.user.is_superuser:
+        return redirect('/error/401')
 
     navigation = {
         'second': 'Users'
@@ -66,7 +68,7 @@ def UsersView(request):
 
 @login_required(login_url='/login/')
 def UsersDataListView(request):
-    if request.user.role.slug != "administrator":
+    if request.user.role.slug != "administrator" and not request.user.is_superuser:
         return HttpResponse("User unauthorized", status=401)
 
     users = User.objects.all()
@@ -87,8 +89,8 @@ def UsersDataListView(request):
 
 @login_required(login_url='/login/')
 def UsersAddView(request):
-    if request.user.role.slug != "administrator":
-        return redirect('error/401')
+    if request.user.role.slug != "administrator" and not request.user.is_superuser:
+        return redirect('/error/401')
 
     if request.method == 'POST':
         form = UsersForm(request.POST)
@@ -115,8 +117,8 @@ def UsersAddView(request):
 
 @login_required(login_url='/login/')
 def UsersEditView(request, id):
-    if request.user.role.slug != "administrator":
-        return redirect('error/401')
+    if request.user.role.slug != "administrator" and not request.user.is_superuser:
+        return redirect('/error/401')
 
     user = User.objects.get(pk=id)
     form = UsersForm(request.POST or None, instance=user)
@@ -140,8 +142,8 @@ def UsersEditView(request, id):
 
 @login_required(login_url='/login/')
 def UsersDestroyView(request, id):
-    if request.user.role.slug != "administrator":
-        return redirect('error/401')
+    if request.user.role.slug != "administrator" and not request.user.is_superuser:
+        return redirect('/error/401')
 
     user = User.objects.get(pk=id)
     user.delete()

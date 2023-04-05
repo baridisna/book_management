@@ -20,7 +20,7 @@
         {% endif %}
             {% csrf_token %}
             <div class="form-floating mb-3">
-                {% render_field form.title class+="form-control" placeholder="Title" %}
+                {% render_field form.title class+="form-control" placeholder="Title" class+='testingo' %}
                 <label for="id_username">Title</label>
                 {{ form.title.errors }}
             </div>
@@ -44,9 +44,11 @@
                 <label for="id_date_of_birth">Cover</label>
                 {{ form.cover.errors }}
             </div>
+            {% if page == 'books-edit' %}
             <div hidden>
                 {% render_field form.created_by %}
             </div>
+            {% endif %}
             <div class="mt-4 mb-0">
                 <div>
                     {% if page == 'books-add' %}
